@@ -1,0 +1,8 @@
+requests
+pandas
+numpy
+sqlalchemy
+psycopg[binary]
+python-dotenv
+jupyter
+ipykernel
