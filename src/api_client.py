@@ -21,4 +21,4 @@ data = fetch_locker_data(1,3)
 rows = data['response']['body']['items']['item']
 for row in rows:
     print("--------------------------------------------------------------------------")
-    print(row['stnNo'])
+    print(row.get())

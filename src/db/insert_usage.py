@@ -9,7 +9,7 @@ from api_client import fetch_locker_data
 
 def insert_locker_usage():
     data = fetch_locker_data(1, 100)
-    rows = data["getFcLckr"]["row"]
+    rows = data['response']['body']['items']['item']
 
     sql = """
     INSERT INTO storage.locker_usage
