@@ -6,16 +6,25 @@ CREATE TABLE storage.locker_types (
     type_name VARCHAR(20) UNIQUE NOT NULL
 );
 
-
 CREATE TABLE storage.locker_usage (
     usage_id SERIAL PRIMARY KEY,
-    station_id INTEGER REFERENCES storage.stations(station_id),
-    type_id INTEGER REFERENCES storage.locker_types(type_id),
+    station_name VARCHAR(100) NOT NULL,
+    locker_type VARCHAR(10) NOT NULL,  -- small / medium / large
     used_count INTEGER NOT NULL,
     observed_at TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (station_id, type_id, observed_at)
+    UNIQUE (station_name, locker_type, observed_at)
 );
+
+drop table STORAGE.locker_types;
+
+select * from "storage".stations;
+select * from "storage".locker_usage;
+select * from "storage".locker_inventory;
+
+select * from "storage".locker_inventory where station_name like '시청%';
+
+
 
 CREATE TABLE storage.locker_inventory (
     inventory_id SERIAL PRIMARY KEY,
@@ -27,8 +36,6 @@ CREATE TABLE storage.locker_inventory (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-select * from "storage".locker_inventory;
 
 
 INSERT INTO storage.locker_types (type_name)
