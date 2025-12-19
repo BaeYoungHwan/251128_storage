@@ -39,7 +39,7 @@ CREATE TABLE storage.locker_usage (
 
 select * from "storage"."local";
 select * from "storage".locker_inventory;
-select * from "storage".locker_usage;
+select * from "storage".locker_usage where station_name = '홍대입구';
 select * from "storage"."local" where local_name like '충정로%';
 
 
