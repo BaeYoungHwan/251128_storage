@@ -1,5 +1,5 @@
 from sqlalchemy import text
-from connection import get_engine
+from .connection import get_engine
 
 def execute(query, params=None):
     engine = get_engine()

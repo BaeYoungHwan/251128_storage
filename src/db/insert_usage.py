@@ -1,5 +1,6 @@
 from datetime import datetime
-from db import execute
+#from db import execute
+import db
 import os
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -8,6 +9,7 @@ sys.path.append(parent_dir)
 from api_client import fetch_locker_data
 
 def insert_usage():
+   
    data = fetch_locker_data(1, 1000)
    rows = data['response']['body']['items']['item']
 
@@ -23,7 +25,7 @@ def insert_usage():
       local_name = local_name.replace( '(','')
       local_name = local_name.replace( ')','')
       
-      execute(sql, {
+      db.execute(sql, {
       "station_name": row["stnNm"],
       "local_id": row["lckrId"],
       "local_name": local_name,

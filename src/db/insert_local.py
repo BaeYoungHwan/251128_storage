@@ -32,7 +32,7 @@ def insert_local():
       
 
  
-if __name__ == "__main__":
-   insert_local()
-   print("locker_usage 수집 완료")
+#if __name__ == "__main__":
+#   insert_local()
+#   print("locker_usage 수집 완료")
 

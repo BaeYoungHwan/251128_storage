@@ -36,6 +36,6 @@ def insert_inventory(pdDF):
 
 
 
-if __name__ == "__main__":
-    insert_inventory(df_final)
-    print("inventory insert 완료")
+#if __name__ == "__main__":
+#    insert_inventory(df_final)
+#    print("inventory insert 완료")
