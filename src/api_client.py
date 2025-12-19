@@ -16,9 +16,13 @@ def fetch_locker_data(start_index=1, end_index=100):
 
     return response.json()
 
-
+"""
 data = fetch_locker_data(1,3)
 rows = data['response']['body']['items']['item']
 for row in rows:
-    print("--------------------------------------------------------------------------")
-    print(row.get())
+    print(row["lckrId"])
+"""
+#data = fetch_locker_data(1,3)
+#for row in rows:
+#    print("--------------------------------------------------------------------------")
+#    print(row.get())

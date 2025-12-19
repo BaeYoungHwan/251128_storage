@@ -9,19 +9,20 @@ CREATE TABLE storage.local(
 );
 
 CREATE TABLE storage.locker_inventory (
-    inventory_id 	VARCHAR(10) 	PRIMARY KEY,
+    inventory_id 	SERIAL 			PRIMARY KEY,
     line_name 		VARCHAR(10)		not null,
 	local_id 		VARCHAR(10) 	not null,  
     local_name 		VARCHAR(100)	not null,
     local_small		int,
 	local_middle	int,
 	local_large		int,
-    created_at 		TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP
+    created_at 		TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (local_id) REFERENCES storage.local(local_id)
 	
 );
+
 CREATE TABLE storage.locker_usage (
-    usage_id 		VARCHAR(10) 	PRIMARY KEY,
+    usage_id 		SERIAL 			PRIMARY KEY,
     station_name 	VARCHAR(100) 	NOT NULL,
 	local_id 		VARCHAR(10)		NOT NULL,
 	local_name 		VARCHAR(100)	not null,
@@ -29,8 +30,26 @@ CREATE TABLE storage.locker_usage (
 	able_middle		int,
 	able_large		int,
     observed_at 	TIMESTAMP NOT NULL,
-    created_at 		TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at 		TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (local_id) REFERENCES storage.local(local_id)
 );
 
 
+
+
+select * from "storage"."local";
+select * from "storage".locker_inventory;
+select * from "storage".locker_usage;
+select * from "storage"."local" where local_name like '충정로%';
+
+
+
+
+drop table storage.local;
+drop table storage.locker_usage;
+drop table storage.locker_inventory;
+
+
+INSERT INTO storage.locker_usage
+    (station_name, local_id, local_name, able_small, able_middle, able_large, observed_at)
+    VALUES ('청량리','sdsd', 'e', 1, 2, 3, '2025-12-19 15:56:00.484762')

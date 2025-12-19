@@ -7,14 +7,14 @@ parent_dir = os.path.join(current_dir, '..')
 sys.path.append(parent_dir)
 from api_client import fetch_locker_data
 
-def insert_usage():
+def insert_local():
    data = fetch_locker_data(1, 1000)
    rows = data['response']['body']['items']['item']
 
    sql = """
-    INSERT INTO storage.locker_usage
-    (station_name, local_id, local_name, able_small, able_middle, able_large, observed_at)
-    VALUES (:station_name, :local_id, :local_name, :able_small, :able_middle, :able_large, :observed_at)
+    INSERT INTO storage.local
+    (local_id, local_name, station_id, station_name, line_name)
+    VALUES (:local_id, :local_name, :station_id, :station_name, :line_name)
     """
    
 
@@ -22,19 +22,17 @@ def insert_usage():
       local_name = row["lckrRprsLocNm"][4:]
       local_name = local_name.replace( '(','')
       local_name = local_name.replace( ')','')
-      
       execute(sql, {
-      "station_name": row["stnNm"],
       "local_id": row["lckrId"],
       "local_name": local_name,
-      "able_small": row["usePsbltySmttypeLckrCnt"],
-      "able_middle": row["usePsbltyMdtypeLckrCnt"],
-      "able_large": row["usePsbltyLrtypeLckrCnt"],
-      "observed_at": row["totCrtrDt"]})
+      "station_id": row["stnNo"],
+      "station_name": row["stnNm"],
+      "line_name": row["lineNm"]
+   })
       
 
  
 if __name__ == "__main__":
-   insert_usage()
-   print("insert_usage 입력 완료")
+   insert_local()
+   print("locker_usage 수집 완료")
 
