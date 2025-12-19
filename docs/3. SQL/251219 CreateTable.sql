@@ -50,6 +50,11 @@ drop table storage.locker_usage;
 drop table storage.locker_inventory;
 
 
+ALTER TABLE storage.locker_usage
+ADD CONSTRAINT unique_local_usage
+UNIQUE (local_id, observed_at);
+
+
 INSERT INTO storage.locker_usage
     (station_name, local_id, local_name, able_small, able_middle, able_large, observed_at)
     VALUES ('청량리','sdsd', 'e', 1, 2, 3, '2025-12-19 15:56:00.484762')
