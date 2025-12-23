@@ -37,14 +37,63 @@ CREATE TABLE storage.locker_usage (
 --drop table storage.local
 --drop table storage.local
 --drop table storage.locker_inventory
-
-select * from "storage".locker_inventory;
-select * from "storage".locker_usage where station_name ='성수';
+select * from "storage".locker_inventory order by locker_inventory.inventory_id;
+select * from "storage".locker_inventory where local_name like '종합&';
+select * from "storage".locker_usage where observed_at > '2025-12-22 17:00:00' and observed_at < '2025-12-22 17:30:00';
 select * from "storage"."local" where local_name like '충정로%';
+select * from "storage".locker_usage where local_name like '올림픽%';
+select * from "storage".locker_inventory ;
+select * from "storage"."local" where local_id = 'TL737';
+select * from "storage".locker_usage;
+
+Begin
+
+TRUNCATE storage.locker_inventory RESTART IDENTITY;
+
+select * from "storage".locker_inventory where local_name = '상도';
+
+
+Rollback
+
+
+
+
+
+
+SELECT
+    "storage"."local".local_id,
+    "storage"."local".local_name AS updated_main_name,
+    "storage".locker_usage.local_name AS original_fk_name,
+    REGEXP_REPLACE("storage".locker_usage.local_name, '^\d+호선\s*', '') AS preview_updated_fk_name
+FROM  "storage".locker_usage
+JOIN  "storage"."local" ON "storage".locker_usage.local_id = "storage"."local".local_id
+WHERE "storage".locker_usage.local_name ~ '^\d+호선\s*';
+
+/*
+BEGIN;
+
+UPDATE "storage"."local"
+SET local_name = REGEXP_REPLACE(local_name, '^\d+호선\s*', '')
+WHERE local_name ~ '^\d+호선\s*';
+
+UPDATE "storage".locker_usage
+SET local_name = "storage"."local".local_name
+FROM "storage"."local"
+WHERE "storage".locker_usage.local_id = "storage"."local".local_id
+  AND "storage".locker_usage.local_name ~ '^\d+호선\s*'; 
+
+COMMIT;
+
+ROLLBACK;
+
+UPDATE stations
+SET station_name = REGEXP_REPLACE(station_name, '^\d+호선\s*', '')
+WHERE station_name ~ '^\d+호선\s*';
 
 Alter Table storage.locker_usage
 add constraint unique_local_usage
 Unique (local_id, observed_at);
+*/
 
 select station_name, local_name from "storage".locker_usage where able_large = 0 and able_middle = 0 and able_small =0 and observed_at > '2025-12-22 17:13';
 
