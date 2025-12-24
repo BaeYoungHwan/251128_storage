@@ -1,0 +1,29 @@
+목표
+usage 데이터의 측정값 일별 사용률*의 Top 10의 보관함 장소 그래프
+
+*일별 사용률 = (전체 보관함 수 - 현재 사용가능 보관함(평균))
+
+
+Storage Locker_usage
+-10분마다 물품보관함의 지하철 역별 실시간 데이터를 가져오는 Table
+
+columns
+- observed_at  : API 갱신일(대략 10분마다 1번)
+- local_name : 보관함의 장소
+- able_small : 사용가능한 소형 보관함
+- able_middle : 사용가능한 중형 보관함
+- able_large : 사용가능한 대형 보관함
+
+
+Storage Locker_Inventory 
+
+- local_name : 보관함의 장소
+- local_small : 현재 배치된 소형 보관함 개수
+- local_middle : 현재 배치된 중형 보관함 개수
+- local_large : 현재 배치된 대형 보관함 개수
+
+
+
+
+
+

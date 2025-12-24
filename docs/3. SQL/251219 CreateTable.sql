@@ -37,16 +37,73 @@ CREATE TABLE storage.locker_usage (
 --drop table storage.local
 --drop table storage.local
 --drop table storage.locker_inventory
-select * from "storage".locker_inventory order by locker_inventory.inventory_id;
-select * from "storage".locker_inventory where local_name like '종합&';
+select * from "storage".locker_inventory order by locker_inventory.local_large;
+select * from "storage".locker_inventory where local_name like '%올림픽%';
 select * from "storage".locker_usage where observed_at > '2025-12-22 17:00:00' and observed_at < '2025-12-22 17:30:00';
-select * from "storage"."local" where local_name like '충정로%';
-select * from "storage".locker_usage where local_name like '올림픽%';
+select * from "storage"."local" where local_name like '올림픽%';
+select * from "storage".locker_usage where local_name like '%종로%' order by observed_at desc, local_name ;
 select * from "storage".locker_inventory ;
-select * from "storage"."local" where local_id = 'TL737';
+select * from "storage"."local" where local_id = 'TL345B';
 select * from "storage".locker_usage;
 
+
+
+
+select * from "storage".locker_usage order by observed_at desc, local_name 
+
+
+/*
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (332, 4, 'TL205C', '동대문역사문화공원61~88', 18, 4, 6);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (333, 2, 'TL208A', '왕십리1~17', 12, 2, 3);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (334, 2, 'TL210A', '뚝섬', 27, 6, 6);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (335, 2, 'TL218A', '종합운동장1~39', 27, 6, 6);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (336, 2, 'TL218B', '종합운동장40~92', 36, 10, 7);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (337, 2, 'TL232', '구로디지탈단지', 12, 2, 3);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (338, 4, 'TL409', '불암산', 6, 2, 1);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (339, 5, 'TL550A', '올림픽공원1~50', 27, 4, 7);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (340, 5, 'TL550C', '올림픽공원51~92', 36, 8, 8);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (341, 6, 'TL626A', '공덕1~21', 15, 2, 4);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (342, 7, 'TL728', '자양', 12, 4, 2);
+
+insert into "storage".locker_inventory
+(inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
+values (343, 7, 'TLP142', '가산디지털', 18, 4, 4);
+
+
 Begin
+
 
 TRUNCATE storage.locker_inventory RESTART IDENTITY;
 
@@ -56,7 +113,7 @@ select * from "storage".locker_inventory where local_name = '상도';
 Rollback
 
 
-
+*/
 
 
 

@@ -32,7 +32,7 @@ def insert_inventory(pdDF):
     if_exists="append",
     index=False
     )
-
+    
 
 
 #if __name__ == "__main__":
