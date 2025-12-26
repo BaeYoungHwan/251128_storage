@@ -5,6 +5,12 @@
 
 관련 블로그 : https://blog.naver.com/uee8351773/224090984156
 
+
+실제 저장 데이터를 활용한 시각화
+
+<img src="data\powerBI\251226 70이상 사용률 및 테이블.png">
+<img src="data\powerBI\251226 특정 데이터 컨택.png">
+
 ## How to Run
 
 1. Create PostgreSQL database
