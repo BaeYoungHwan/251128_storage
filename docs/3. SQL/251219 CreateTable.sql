@@ -41,7 +41,7 @@ select * from "storage".locker_inventory order by locker_inventory.local_large;
 select * from "storage".locker_inventory where local_name like '%올림픽%';
 select * from "storage".locker_usage where observed_at > '2025-12-22 17:00:00' and observed_at < '2025-12-22 17:30:00';
 select * from "storage"."local" where local_name like '올림픽%';
-select * from "storage".locker_usage where local_name like '%종로%' order by observed_at desc, local_name ;
+select * from "storage".locker_usage where local_name like '%잠실9%' order by observed_at desc, local_name ;
 select * from "storage".locker_inventory ;
 select * from "storage"."local" where local_id = 'TL345B';
 select * from "storage".locker_usage;
