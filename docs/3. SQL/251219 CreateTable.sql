@@ -37,6 +37,7 @@ CREATE TABLE storage.locker_usage (
 --drop table storage.local
 --drop table storage.local
 --drop table storage.locker_inventory
+
 select * from "storage".locker_inventory order by locker_inventory.local_large;
 select * from "storage".locker_inventory where local_name like '%올림픽%';
 select * from "storage".locker_usage where observed_at > '2025-12-22 17:00:00' and observed_at < '2025-12-22 17:30:00';
@@ -48,11 +49,25 @@ select * from "storage".locker_usage;
 
 
 
+select * from "storage".locker_usage order by observed_at desc, local_name; 
+select * from "storage".locker_usage where local_name like '%올림%' order by observed_at desc, local_name; 
 
-select * from "storage".locker_usage order by observed_at desc, local_name 
-
+select * from "storage".locker_usage order by observed_at;
 
 /*
+begin
+
+delete from "storage".locker_usage
+where locker_usage.observed_at = '2025-09-26 18:44:25';
+
+delete from "storage".locker_usage
+where locker_usage.observed_at = '2025-09-26 18:44:26';
+
+select * from "storage".locker_usage order by observed_at;
+
+commit 
+
+
 insert into "storage".locker_inventory
 (inventory_id,line_name, local_id, local_name, local_small, local_middle, local_large)
 values (332, 4, 'TL205C', '동대문역사문화공원61~88', 18, 4, 6);
