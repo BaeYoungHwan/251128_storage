@@ -50,8 +50,8 @@ select * from "storage".locker_usage;
 
 
 select * from "storage".locker_usage order by observed_at desc, local_name; 
-select * from "storage".locker_usage where local_name like '%올림%' order by observed_at desc, local_name; 
-
+select * from "storage".locker_usage where local_name like '%종각%' order by observed_at desc, local_name; 
+``
 select * from "storage".locker_usage order by observed_at;
 
 /*
