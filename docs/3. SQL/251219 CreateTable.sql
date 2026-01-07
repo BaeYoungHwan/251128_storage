@@ -50,11 +50,35 @@ select * from "storage".locker_usage;
 
 
 select * from "storage".locker_usage order by observed_at desc, local_name; 
-select * from "storage".locker_usage where local_name like '%종각%' order by observed_at desc, local_name; 
-``
+
+select u.local_name, able_small as Small, able_middle as Middle, able_large as Large, 
+i.local_small + i.local_middle + i.local_large as "Total", 
+Round((((i.local_small + i.local_middle + i.local_large) - (u.able_small + u.able_middle + u.able_large))::numeric / (i.local_small + i.local_middle + i.local_large)) * 100)::text || '%' as "percent",
+observed_at, u.created_at
+from "storage".locker_usage u, "storage".locker_inventory i
+where u.local_id = i.local_id and Round((((i.local_small + i.local_middle + i.local_large) - (u.able_small + u.able_middle + u.able_large))::numeric / (i.local_small + i.local_middle + i.local_large)) * 100) < 0
+order by observed_at desc, local_name;
+
+
+/*
+-- 이용률이 -인 이유는 inventory master data가 맞지 않기 때문이다. 변경필요
+select DISTINCT u.local_name
+from "storage".locker_usage u, "storage".locker_inventory i
+where u.local_id = i.local_id and Round((((i.local_small + i.local_middle + i.local_large) - (u.able_small + u.able_middle + u.able_large))::numeric / (i.local_small + i.local_middle + i.local_large)) * 100) < 0
+"경복궁30~51"
+"성수1~28"
+"성수29~45"
+"시청1~28"
+"신도림54~79"
+"신용산"
+--완료
+*/
+
 select * from "storage".locker_usage order by observed_at;
 
 /*
+---------------------delete-----------------------------------
+
 begin
 
 delete from "storage".locker_usage
@@ -66,6 +90,8 @@ where locker_usage.observed_at = '2025-09-26 18:44:26';
 select * from "storage".locker_usage order by observed_at;
 
 commit 
+
+---------------------insert-----------------------------------
 
 
 insert into "storage".locker_inventory
@@ -142,6 +168,9 @@ JOIN  "storage"."local" ON "storage".locker_usage.local_id = "storage"."local".l
 WHERE "storage".locker_usage.local_name ~ '^\d+호선\s*';
 
 /*
+
+---------------------update-----------------------------------
+
 BEGIN;
 
 UPDATE "storage"."local"
@@ -165,7 +194,91 @@ WHERE station_name ~ '^\d+호선\s*';
 Alter Table storage.locker_usage
 add constraint unique_local_usage
 Unique (local_id, observed_at);
+
+
+
+
+update "storage".locker_inventory
+set local_small = 39
+where local_id = 'TL550A';
+
+update "storage".locker_inventory
+set local_large = 11
+where local_id = 'TL550A';
+
+update "storage".locker_inventory
+set local_small = 36
+where local_id = 'TL550C';
+
+update "storage".locker_inventory
+set local_middle = 8
+where local_id = 'TL550C';
+
+--경복궁
+update "storage".locker_inventory
+set local_small = 24
+where local_id = 'TL327B';
+
+update "storage".locker_inventory
+set local_large = 6
+where local_id = 'TL327B';
+
+--성수
+update "storage".locker_inventory
+set local_small = 24
+where local_id = 'TL211A';
+
+update "storage".locker_inventory
+set local_middle = 6
+where local_id = 'TL211A';
+
+update "storage".locker_inventory
+set local_large = 7
+where local_id = 'TL211A';
+
+
+update "storage".locker_inventory
+set local_small = 18
+where local_id = 'TL211B';
+
+update "storage".locker_inventory
+set local_middle = 4
+where local_id = 'TL211B';
+
+update "storage".locker_inventory
+set local_large = 4
+where local_id = 'TL211B';
+
+--시청
+update "storage".locker_inventory
+set local_small = 18
+where local_id = 'TL132A';
+
+update "storage".locker_inventory
+set local_large = 6
+where local_id = 'TL132A';
+
+--신도림
+update "storage".locker_inventory
+set local_small = 24
+where local_id = 'TL234C';
+
+update "storage".locker_inventory
+set local_large = 8
+where local_id = 'TL234C';
+
+--신용산
+update "storage".locker_inventory
+set local_small = 18
+where local_id = 'TL429';
+
+update "storage".locker_inventory
+set local_large = 5
+where local_id = 'TL429';
+
+select * from "storage".locker_inventory where local_name like '%신용산%';
 */
+
 
 select station_name, local_name from "storage".locker_usage where able_large = 0 and able_middle = 0 and able_small =0 and observed_at > '2025-12-22 17:13';
 
