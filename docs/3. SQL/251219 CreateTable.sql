@@ -56,7 +56,7 @@ i.local_small + i.local_middle + i.local_large as "Total",
 Round((((i.local_small + i.local_middle + i.local_large) - (u.able_small + u.able_middle + u.able_large))::numeric / (i.local_small + i.local_middle + i.local_large)) * 100)::text || '%' as "percent",
 observed_at, u.created_at
 from "storage".locker_usage u, "storage".locker_inventory i
-where u.local_id = i.local_id and Round((((i.local_small + i.local_middle + i.local_large) - (u.able_small + u.able_middle + u.able_large))::numeric / (i.local_small + i.local_middle + i.local_large)) * 100) < 0
+where u.local_id = i.local_id
 order by observed_at desc, local_name;
 
 
