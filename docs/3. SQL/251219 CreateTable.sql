@@ -51,6 +51,8 @@ select * from "storage".locker_usage;
 
 select * from "storage".locker_usage order by observed_at desc, local_name; 
 
+
+
 select u.local_name, able_small as Small, able_middle as Middle, able_large as Large, 
 i.local_small + i.local_middle + i.local_large as "Total", 
 Round((((i.local_small + i.local_middle + i.local_large) - (u.able_small + u.able_middle + u.able_large))::numeric / (i.local_small + i.local_middle + i.local_large)) * 100)::text || '%' as "percent",
