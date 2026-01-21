@@ -32,7 +32,7 @@ def insert_Amenities(pdDF):
     engine = get_engine()
 
     status = pdDF.to_sql(
-    "local_Amenities",
+    "local_amenities",
     engine,
     schema = "storage",
     if_exists="append",
@@ -40,15 +40,18 @@ def insert_Amenities(pdDF):
     )
 
 df_merged.drop(['station_id_y','line_name_y'], axis=1, inplace=True)
-df_merged = df_merged.rename(columns={
+df_final = df_merged.rename(columns={
 
-    "station_id" : "station_id_x",
-    "line_name" : "line_name_x",
-
+    "station_id_x" : "station_id",
+    "line_name_x" : "line_name",
 
 })
 
-df_merged.to_csv('merge.csv', index=False, encoding='utf-8-sig')
+df_final.drop_duplicates(subset=['station_id'], inplace=True)
+
+
+# print(df_final)
+df_final.to_csv('merge.csv', index=False, encoding='utf-8-sig')
 
 
 # if __name__ == "__main__":
