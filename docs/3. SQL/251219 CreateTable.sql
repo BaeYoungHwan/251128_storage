@@ -61,7 +61,7 @@ from "storage".locker_usage u, "storage".locker_inventory i
 where u.local_id = i.local_id and u.local_name like '%건%'
 order by observed_at desc, percent desc ;
 
-
+select * from "storage"."local";
 
 /*
 -- 이용률이 -인 이유는 inventory master data가 맞지 않기 때문이다. 변경필요
