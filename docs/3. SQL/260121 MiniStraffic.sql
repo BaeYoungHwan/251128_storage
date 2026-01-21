@@ -14,13 +14,11 @@
 -- 	created_at 			TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP
 -- );
 
+drop table storage.Amenities;
 
-select * from storage.local_Amenities;
+select * from storage.local_amenities;
 
 select * from storage.local
-
-
-select * from miniproject.login
 
 CREATE TABLE storage.user(
 	user_id				VARCHAR(20)		primary key,
@@ -29,7 +27,7 @@ CREATE TABLE storage.user(
 	station_name 		VARCHAR(100)	not null,
 	line_name 			VARCHAR(10)		not null,
 	user_name			VARCHAR(10)		not null,
-	user_email			VARCHAR(20)
+	user_email			VARCHAR(20),
 	auth				VARCHAR(10)		not null
 	
 );

@@ -51,9 +51,9 @@ df_final.drop_duplicates(subset=['station_id'], inplace=True)
 
 
 # print(df_final)
-df_final.to_csv('merge.csv', index=False, encoding='utf-8-sig')
+#df_final.to_csv('merge.csv', index=False, encoding='utf-8-sig')
 
 
-# if __name__ == "__main__":
-#     insert_Amenities(df_final)
-#     print("inventory insert 완료")
+if __name__ == "__main__":
+    insert_Amenities(df_final)
+    print("inventory insert 완료")
