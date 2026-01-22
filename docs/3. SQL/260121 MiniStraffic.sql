@@ -18,7 +18,7 @@ drop table storage.Amenities;
 
 select * from storage.local_amenities;
 
-select * from storage.local
+select * from storage.locker_usage order by locker_usage.created_at desc
 
 CREATE TABLE storage.user(
 	user_id				VARCHAR(20)		primary key,
