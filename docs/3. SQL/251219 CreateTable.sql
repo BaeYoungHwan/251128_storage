@@ -53,12 +53,14 @@ select * from "storage".locker_usage order by observed_at desc, local_name;
 
 
 
-select u.local_name, able_small as Small, able_middle as Middle, able_large as Large, 
+select * from "storage".local_amenities where station_name like'%동대문%';
+
+select u.local_name, i.line_name,able_small as Small, able_middle as Middle, able_large as Large, 
 i.local_small + i.local_middle + i.local_large as "Total", 
 Round((((i.local_small + i.local_middle + i.local_large) - (u.able_small + u.able_middle + u.able_large))::numeric / (i.local_small + i.local_middle + i.local_large)) * 100)::text || '%' as "percent",
 observed_at, u.created_at
 from "storage".locker_usage u, "storage".locker_inventory i
-where u.local_id = i.local_id and u.local_name like '%길음%'
+where u.local_id = i.local_id and u.local_name like '%까치산%'
 order by observed_at desc, percent desc ;
 
 select * from "storage"."local";
@@ -78,7 +80,7 @@ where u.local_id = i.local_id and Round((((i.local_small + i.local_middle + i.lo
 */
 
 select * from "storage".locker_usage order by observed_at desc;
-
+select * from "storage".incident;
 /*
 ---------------------delete-----------------------------------
 
