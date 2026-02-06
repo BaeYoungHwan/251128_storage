@@ -69,11 +69,11 @@ def parse_weather(text):
 
         try:
             tm = cols[0]
-            wd = float(cols[1])
-            ws = float(cols[2])
-            ta = float(cols[3])
-            hm = float(cols[4])
-            rn = float(cols[5])
+            wd = float(cols[2])
+            ws = float(cols[3])
+            ta = float(cols[11])
+            hm = float(cols[13])
+            rn = float(cols[15])
 
             data_list.append(
                 (tm, wd, ws, ta, hm, rn)
