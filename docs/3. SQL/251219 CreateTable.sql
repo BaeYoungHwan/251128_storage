@@ -78,7 +78,10 @@ where u.local_id = i.local_id and Round((((i.local_small + i.local_middle + i.lo
 "신용산"
 --완료
 */
-select * from "storage".weather;
+
+select tm as 관측시간, ta as 온도, wd as 풍향, ws as 풍속, hm as 상대습도, rn as 강수량mm, reg_dt as 생성일
+from "storage".weather order by tm desc;
+
 select * from "storage".locker_usage order by observed_at desc;
 select * from "storage".incident;
 /*
